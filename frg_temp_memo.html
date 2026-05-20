@@ -1,0 +1,29 @@
+<?php
+session_start();
+require_once("item/common/define.php");
+require_once ( COM_DIR . "init_ad.php");
+
+//ログインチェック
+	login_chk($_SESSION["ad_id"]);
+
+//物件情報１件取得
+
+$frg_temp_id = 'tempmemo00';
+
+$list_data = temp_get($frg_temp_id);
+
+
+//ヘッダ情報
+echo st_header_ad();
+?>
+<body>
+<?=hp_header_ad()?>
+<?=site_menu();?>
+<?="<p>-today is-".date("Y-m-d")."</p>";?>
+	<h2>-temporary memo-<a href="<?=h(URL_PATH)?>frg_temp_memo_edt.html?frgid=<?=h($frg_temp_id)?>">[&#x270D]</a></h2>
+	<hr>
+	<article><?=makelink(v2(h($list_data['frg_temp_txt'])));?></article>
+	<hr>
+<?=hp_footer_ad()?>
+</body>
+</html>

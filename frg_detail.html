@@ -1,0 +1,40 @@
+<?php
+session_start();
+require_once("item/common/define.php");
+require_once ( COM_DIR . "init_ad.php");
+
+//ログインチェック
+	login_chk($_SESSION["ad_id"]);
+
+//物件情報１件取得
+
+if($_GET["frgid"]==""){
+	$frgid = "";
+}else{
+	$frgid = h($_GET["frgid"]);
+}
+
+if($frgid){
+	$list_data = list_get($frgid);
+}else{
+	#データなしの場合は新規登録扱いとする。
+	$list_data = array();
+}
+$list_data["frg_ctgr"] = explode(',', $list_data["frg_ctgr"]);
+
+//ヘッダ情報
+echo st_header_ad();
+?>
+<body>
+<?=hp_header_ad()?>
+<?=site_menu();?>
+<?="<p>-today is-".date("Y-m-d")."</p>";?>
+	<h2><?=$list_data['frg_title'];?><a href="<?=h(URL_PATH)?>frg_detail_edt.html?frgid=<?=h($frgid)?>">[&#x270D]</a><a href="<?=h(URL_PATH)?>frg_detail_edt.html">[&plus;]</a></h2>
+	<p><?=ctgr_selected($list_data['frg_ctgr']);?></p>
+	<hr>
+	<article><?=makelink(v2(h($list_data['frg_fragments'])));?></article>
+	<p class="spacing-top80"><span class="date">First post:<?=$list_data['frg_ins_date'].'</span>';if(isset($list_data['frg_upd_date'])){echo '<span class="date">Update:'.$list_data['frg_upd_date'].'</span>';}?></p>
+	<hr>
+<?=hp_footer_ad()?>
+</body>
+</html>

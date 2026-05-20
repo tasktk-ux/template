@@ -1,0 +1,70 @@
+<?php
+session_start();
+require_once("item/common/define.php");
+require_once ( COM_DIR . "init_ad.php");
+
+//ログインチェック
+	login_chk($_SESSION["ad_id"]);
+//物件更新
+if(isset($_POST["spls"])){
+	if(isset($_POST["frg_ctgr"])){
+		$_POST["frg_ctgr"] = implode(',', $_POST["frg_ctgr"]);
+	}
+	$error = list_db_ld($_POST);
+	if($_POST['frg_id']===""){
+		$logout_url = URL_PATH;
+	}else{
+		$logout_url = URL_PATH."frg_detail.html?frgid=".$_POST['frg_id'];
+	}
+	header("Location: {$logout_url}");
+}
+
+//物件情報１件取得
+
+$frgid = "";
+if(isset($_GET["frgid"])){
+	$frgid = h($_GET["frgid"]);
+}
+
+if($frgid){
+	$list_data = list_get($frgid);
+}else{
+	#データなしの場合は新規登録扱いとする。
+	$list_data = array();
+}
+
+if(isset($list_data["frg_ctgr"])){
+	$list_data["frg_ctgr"] = explode(',', $list_data["frg_ctgr"]);
+}else{
+	$list_data["frg_ctgr"] = array();
+}
+
+//ヘッダ情報
+echo st_header_ad();
+?>
+<body>
+<?=hp_header_ad()?>
+<?=site_menu();?>
+<?="<p>-today is-".date("Y-m-d")."</p>";?>
+	<form action="" method="POST"  id="articleForm">
+		<h2>【Article Edit】</h2>
+		<label class="ctgr_sw"><input type="radio" name="frg_sw" value="1"<?if(!isset($list_data["frg_sw"]) or $list_data["frg_sw"]!="9"){echo " checked";}?> required>article open</label>
+		<label class="ctgr_sw"><input type="radio" name="frg_sw" value="9"<?if(isset($list_data["frg_sw"]) and $list_data["frg_sw"]=="9"){echo " checked";}?> required>article close</label>
+		<p><?=ctgr_select($list_data["frg_ctgr"]);?></p>
+		<hr>
+		<h3>-Title-</h3>
+		<input type="text" name="frg_title" value="<?if(isset($list_data["frg_title"])){echo h($list_data["frg_title"]);}?>" class="full-width-input">
+		<h3>-Memo area(text only)-</h3>
+		<textarea name="frg_fragments" rows="30" id="frg_fragments"><?if(isset($list_data["frg_fragments"])){echo h($list_data['frg_fragments']);}?></textarea>
+		<p>
+		<input type="hidden" name="frg_id" value="<?if(isset($list_data["frg_id"])){echo h($list_data["frg_id"]);}?>">
+		<input type="hidden" name="spls" value="do_news"/>
+		<input type="submit" name="loginbtn" value="submit" class="login_btn"/>
+		</p>
+		
+	</form>
+	<!-- / #main -->
+<hr>
+<?=hp_footer_ad()?>
+</body>
+</html>
