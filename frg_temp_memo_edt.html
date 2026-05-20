@@ -1,0 +1,45 @@
+<?php
+session_start();
+require_once("item/common/define.php");
+require_once ( COM_DIR . "init_ad.php");
+
+//ログインチェック
+	login_chk($_SESSION["ad_id"]);
+//物件更新
+if(isset($_POST["spls"])){
+	$error = temp_db_ld($_POST);
+	$logout_url = URL_PATH."frg_temp_memo.html";
+	header("Location: {$logout_url}");
+}
+
+//物件情報１件取得
+
+$frgid = "tempmemo00";
+
+$temp_data = temp_get($frgid);
+
+
+//ヘッダ情報
+echo st_header_ad();
+?>
+<body>
+<?=hp_header_ad()?>
+<?=site_menu();?>
+<?="<p>-today is-".date("Y-m-d")."</p>";?>
+	<form action="" method="POST"  id="articleForm">
+		<h3>-temporary memo-<br>
+		<font color="red">Intended for copying to other apps.It's temporary, so be careful if you want to keep it</font></h3>
+		<h3>-Memo area(text only)-</h3>
+		<textarea name="frg_temp_txt" rows="30" id="frg_fragments"><?if(isset($temp_data["frg_temp_txt"])){echo h($temp_data['frg_temp_txt']);}?></textarea>
+		<p>
+		<input type="hidden" name="frg_temp_id" value="tempmemo00">
+		<input type="hidden" name="spls" value="do_news"/>
+		<input type="submit" name="loginbtn" value="submit" class="login_btn"/>
+		</p>
+		
+	</form>
+	<!-- / #main -->
+<hr>
+<?=hp_footer_ad()?>
+</body>
+</html>

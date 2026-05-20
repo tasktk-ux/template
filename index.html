@@ -1,0 +1,25 @@
+<?
+session_start();
+require_once("item/common/define.php");
+require_once ( COM_DIR . "init_ad.php");
+//ログインチェック
+	login_chk($_SESSION["ad_id"]);
+//SORT項目
+	if(isset($_GET['frg_sw']) AND $_GET['frg_sw']!=''){$frg_sw = $_GET['frg_sw'];}else{$frg_sw='';}
+	if(isset($_GET['frg_ctgr']) AND $_GET['frg_ctgr']!=''){$frg_ctgr = $_GET['frg_ctgr'];}else{$frg_ctgr='';}
+	if(isset($_GET['srch_wd']) AND $_GET['srch_wd']!=''){$srch_wd = $_GET['srch_wd'];}else{$srch_wd='';}
+	if(isset($_GET['ind_dt']) AND $_GET['ind_dt']!=''){$ind_dt = $_GET['ind_dt'];}else{$ind_dt='';}
+	if(isset($_GET['upd_dt']) AND $_GET['upd_dt']!=''){$upd_dt = $_GET['upd_dt'];}else{$upd_dt='';}
+	if(isset($_GET['page_num']) AND $_GET['page_num']!=''){$page_num = $_GET['page_num'];}else{$page_num=0;}
+//サイトヘッダ
+echo st_header_ad();
+?>
+<body>
+<?=hp_header_ad();?>
+<?=site_menu();?>
+<?="<p>-today is-".date("Y-m-d")."</p>";?>
+<?=frg_list($frg_sw,$frg_ctgr,$srch_wd,$ind_dt,$upd_dt,$page_num);?>
+<!-- / #main -->
+<?=hp_footer_ad()?>
+</body>
+</html>

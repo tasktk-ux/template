@@ -1,0 +1,20 @@
+<?php
+session_start();
+//定数定義
+require_once("item/common/define.php");
+$adds = URL_PATH."login.html";
+//ログアウト
+$_SESSION = array();
+
+//セッションを無効にするための処理
+if(isset($_COOKIE[session_name()])) {
+	setcookie(session_name(), '', time()-42000, '/');
+	unset($_SESSION['token']);
+}
+
+session_destroy();
+//ログアウト後 URL --- 編集してください。
+header("Location: {$adds}");
+
+exit;
+?>

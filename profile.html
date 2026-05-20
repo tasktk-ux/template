@@ -1,0 +1,47 @@
+<?
+//セッション、定数定義
+session_start();
+require_once("item/common/define.php");
+require_once ( COM_DIR . "init_ad.php");
+require_once ( COM_DIR . "login.php");
+//ログイン判定
+	if(isset($_POST["spls"])){$error = login_sub($_POST);}
+//サイトヘッダ
+echo st_header_ad();
+?>
+<body>
+<div class="login">
+<?=hp_header_ad();//共通ヘッダ?>
+<h2>Profile</h2>
+	<form name="login_form" action="" method="POST">
+		<ul>
+			<li>ID</li>
+			<li><input type="text" name="cliant_key" maxlength="30" size="30" class="width-input250" required></li>
+		</ul>
+		<ul>
+			<li>Password</li>
+			<li><input type="password" name="pass" maxlength="30" size="30" class="width-input250" required></li>
+		</ul>
+		<ul>
+			<li>new Password</li>
+			<li><input type="password" name="pass_new" maxlength="30" size="30" class="width-input250" required></li>
+		</ul>
+		<ul>
+			<li>e-mail</li>
+			<li><input type="password" name="email" maxlength="30" size="30" class="width-input250" required></li>
+		</ul>
+		<p>
+			<input type="hidden" name="spls" value="do_login"/>
+			<input type="submit" name="loginbtn" value="submit"/>
+	<?
+	if(isset($error)){
+		echo '<span class="error">' .h($error).'</span>'.PHP_EOL;
+	}
+	?>	</p>
+	</form>
+<hr>
+	<!-- / #main -->
+<?=hp_footer_ad()?>
+</div>
+</body>
+</html>

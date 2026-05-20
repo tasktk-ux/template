@@ -1,0 +1,105 @@
+body {
+  margin: 20px 30px 0px 30px;
+}
+
+footer{
+  text-align: center;
+}
+
+article {
+  padding: 20px 15px 15px 15px;
+  word-wrap: break-word;
+  background-color:#f0f2ff;
+}
+textarea {
+  width: 100%;
+  box-sizing: border-box; /* 追加：内側のpaddingやborderを含めた幅を設定 */
+}
+summary {
+  padding-left:10px;
+  width: 50%;
+  color: #fff;
+  margin-bottom:10px;
+  background-image: linear-gradient(120deg, rgba(38, 40, 89, 1), rgba(255, 255, 255, 0));
+  text-align: left;
+}
+details {
+  margin-top: 5px;
+  padding-left: 5px;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+table th,table td{
+  padding: 10px 0;
+  text-align: center;
+}
+
+table tr:nth-child(odd){
+  background-color: #f0f7ff
+}
+
+ul{
+  padding-left:0;
+}
+
+li{
+  list-style:none;
+}
+
+.full-width-input {
+  width: 100%;
+  box-sizing: border-box; /* 内側のpaddingやborderを含めた幅を設定 */
+}
+
+
+.width-input250 {
+  width: 250px;
+  box-sizing: border-box; /* 内側のpaddingやborderを含めた幅を設定 */
+}
+
+hr{
+  margin: 5px 0px 20px 0px;
+  padding:0px;
+}
+input, select, textarea, text {
+	font-size: 18px;
+}
+.error {
+  color: #ff0000;
+}
+.login {
+  margin: 20px 15px 15px 15px;
+  padding: 20px 15px 15px 15px;
+  text-align:center;
+}
+.logout {
+  font-size:12px;
+  margin-left: 15px;
+}
+.ctgr {
+  padding:2px;
+  background-color: #5b60fb;
+  color: #fff;
+}
+.ctgr_sw {
+  padding:2px;
+  background-color: #b8c1ff;
+  color: #fff;
+}
+.date {
+  margin-left:5px;
+  margin-right:5px;
+  background-color: #9497ff;
+  color: #fff;
+}
+.t_left {
+  text-align:left;
+}
+.spacing-top80{
+  margin-top:80px;
+}
